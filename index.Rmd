@@ -1,5 +1,8 @@
 ---
-title: "spatial-transcriptomics"
+title: "index"
+author: "Ronald Wu"
+date: "2023-05-09"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +17,6 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 summary(cars)
-print("hello world.")
 ```
 
 ## Including Plots
