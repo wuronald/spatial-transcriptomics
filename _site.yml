@@ -9,4 +9,4 @@ navbar:
     href: spatial-transcriptomics-report.html
 output:
   html_document:
-    theme: minimal
+    theme: cerulean
