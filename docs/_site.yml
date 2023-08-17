@@ -4,9 +4,9 @@ navbar:
   title: "spatial-transcriptomics"
   left:
   - text: "Home"
-      href: index.html
+    href: index.html
   - text: "spatial-transcriptomics-report"
-      href: spatial-transcriptomics-report.html
+    href: spatial-transcriptomics-report.html
 output:
   html_document:
-    theme: cerulean
+    theme: cosmo
