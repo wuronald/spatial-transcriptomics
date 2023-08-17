@@ -1,12 +1,28 @@
-name: "spatial-transcriptomics"
-output_dir: "docs"
+name: "Website Title"
+exclude: ["download", "libs"]
+output_dir: "." ## if making website hostable on github with jekyll
 navbar:
-  title: "spatial-transcriptomics"
-  left:
+  title: "NavBar Title"
+  right:
     - text: "Home"
       href: index.html
-    - text: "spatial-transcriptomics-report"
-      href: spatial-transcriptomics-report.html
+    - text: 'About'
+      href: about.html
+    - text: 'Whatever Menu' ## setting up a drop down menu
+      menu:
+        - text: 'Whatever Menu 1'
+          href: whatevermenu1.html
+        - text: 'Whatever Menu 2'
+          href: whatevermenu2.html
+        - text: 'Whatever Menu 3'
+          href: whatevermenu3.html
+    - text: 'Unicorns'
+      href: unicorns.html
+    - text: 'Downloads'
+      href: downloads.html
+
 output:
   html_document:
-    theme: cosmo
+    theme: sandstone ## Preference
+    highlight: textmate ## Preference
+
