@@ -7,7 +7,12 @@ knit: (function(input_file, encoding) {
       output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 author: "Ronald Wu"
 date: "2023-05-09"
-output: html_document
+output: 
+  html_document:
+    theme: cerulean
+    toc: yes
+    toc_float:
+      collapsed: true
 ---
 
 ```{r setup, include=FALSE}
