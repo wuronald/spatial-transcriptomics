@@ -1,5 +1,10 @@
 ---
 title: "index"
+knit: (function(input_file, encoding) {
+    out_dir <- 'docs';
+    rmarkdown::render(input_file,
+      encoding=encoding,
+      output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 author: "Ronald Wu"
 date: "2023-05-09"
 output: html_document
@@ -9,7 +14,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Hello World!!
+## Hello World!! Surely this works
 
 ## R Markdown
 

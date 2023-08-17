@@ -1,5 +1,13 @@
 ---
 title: "spatial-transcriptomics"
+knit: (function(input_file, encoding) {
+    out_dir <- 'docs';
+    rmarkdown::render(input_file,
+      encoding=encoding,
+      output_file=file.path(dirname(input_file), out_dir, 'spatial-transcriptomics-report.html'))})
+author: "Ronald Wu"
+date: "2023-05-09"
+output: html_document      
 ---
 
 ```{r setup, include=FALSE}
@@ -39,10 +47,11 @@ library(SPATAData)
 library(SPATA2)
 
 # overview of available datasets:
-View(source_df)
+#View(source_df)
+source_df
 
 # load Shiny interactive downloader
-launchSpataData()
+# launchSpataData()
 
 ```
 
@@ -56,7 +65,7 @@ launchSpataData()
 
 # Downloads multiple spata objects at the same time  
 
-downloadSpataObjects(sample_names = c("275_T", "334_T"), folder = "objects")
+#downloadSpataObjects(sample_names = c("275_T", "334_T"), folder = "objects")
 
 ```
 
@@ -105,7 +114,7 @@ p2 + legendTop()
 
 # View Sample Interactively
 ```{r interactive viewer}
-plots <- plotSurfaceInteractive(object = human_gbm)
+# plots <- plotSurfaceInteractive(object = human_gbm)
 
 ```
 
