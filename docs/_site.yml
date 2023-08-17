@@ -1,0 +1,12 @@
+name: "spatial-transcriptomics"
+output_dir: "docs"
+navbar:
+  title: "spatial-transcriptomics"
+  left:
+  - text: "Home"
+    href: index.html
+  - text: "spatial-transcriptomics-report"
+    href: spatial-transcriptomics-report.html
+output:
+  html_document:
+    theme: cerulean
