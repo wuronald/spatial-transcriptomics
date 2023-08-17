@@ -6,23 +6,107 @@ title: "spatial-transcriptomics"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-print("hello world.")
+## Install Packages
+```{r Install Packages}
+# install.packages("devtools")
+# 
+# if (!base::requireNamespace("BiocManager", quietly = TRUE)){
+#       install.packages("BiocManager")
+#   }
+# 
+# BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats',
+#                        'limma', 'S4Vectors', 'SingleCellExperiment',
+#                        'SummarizedExperiment', 'batchelor', 'Matrix.utils', 'EBImage'))
+# 
+# install.packages("Seurat")
+# 
+# devtools::install_github(repo = "kueckelj/confuns")
+# devtools::install_github(repo = "theMILOlab/SPATA2")
+# 
+# # if you want to use monocle3 related wrappers 
+# devtools::install_github('cole-trapnell-lab/leidenbase')
+# devtools::install_github('cole-trapnell-lab/monocle3')
+# 
+# # if you want to download data from MILOLab
+# devtools::install_github("theMILOlab/SPATAData")
 ```
 
-## Including Plots
+# MILOLab Database
 
-You can also embed plots, for example:
+```{r explore MILOLab database}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+library(SPATAData)
+library(SPATA2)
+
+# overview of available datasets:
+View(source_df)
+
+# load Shiny interactive downloader
+launchSpataData()
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# MILOLab Database: Download SPATA objects
+```{r download SPATA Objects from MILOLab database}
+
+# Downloads single spata objects, saves them on your device and immediately
+# returns them
+
+#object <- downloadSpataObject(sample_name = "275_T")
+
+# Downloads multiple spata objects at the same time  
+
+downloadSpataObjects(sample_names = c("275_T", "334_T"), folder = "objects")
+
+```
+
+# Visualization of GBM sample 275_T with SPATA2
+```{r SPATA2 on GBM sample}
+# load packages
+library(SPATA2)
+
+# ggplot2 plots can be easily combined with 'patchwork'
+library(patchwork) 
+
+# load objects
+#human_cortex <- loadSpataObject("data/spata-obj-cortex265.RDS")
+human_gbm <- loadSpataObject("objects/275_T.RDS")
+
+# store example genes of interest as character vectors
+genes_a <- c("TUBA1B", "HOPX", "PLP1", "ACTB")
+genes_b <- c("CARTPT", "OLIG1", "GFAP", "SYNPR", "HOPX", "CCK")
+```
+
+```{r Basic Surface Plots}
+# View FeatureNames
+getFeatureNames(human_gbm)
+
+# plot gene expression 
+p1 <- 
+  plotSurface(object = human_gbm, 
+              color_by = "CA9",
+              pt_size = 1.2,
+              pt_clrsp = "magma"
+              )
+
+# plot gene expression (spatially smoothed)
+p2 <- 
+  plotSurface(object = human_gbm, 
+              color_by = "CA9",
+              pt_size = 1.2,
+              pt_clrsp = "magma",
+              smooth = TRUE, 
+              smooth_span = 0.2)
+
+# combine with patchwork 
+p1 + legendNone() +
+p2 + legendTop()
+```
+
+# View Sample Interactively
+```{r interactive viewer}
+plots <- plotSurfaceInteractive(object = human_gbm)
+
+```
+
+# Next
