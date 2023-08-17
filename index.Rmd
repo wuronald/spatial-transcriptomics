@@ -51,3 +51,13 @@ SpatialLIBD was created by researchers at the Lieber Institute for Brain Develop
 ### Giotto Suite
 
 Giotto Suite seems to be the most flexible spatial analysis platform current in R, where it can process and analyze data from various platforms (eg. Visium, MERFISH, CODEX, Xenium, and others)
+
+# Projects
+
+## Project 1: Exploring the interoperability of ST objects
+
+I will show you how to use SPATA2v2 to analyze one of Ravi's GBM samples. The analysis will be performed on the SPATA2 object.
+
+We will then explore various functions to convert the SPATA2 object to SCE, Seurat, SpatialExperiment objects. 
+
+Lastly, we will compare figures created from each of these objects with the original SPATA2 object.
