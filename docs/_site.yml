@@ -1,6 +1,5 @@
-name: "Website Title"
-exclude: ["download", "libs"]
-output_dir: "." ## if making website hostable on github with jekyll
+name: "docs"
+output_dir: "docs"
 navbar:
   title: "NavBar Title"
   right:

@@ -9,7 +9,6 @@ author: "Ronald Wu"
 date: "2023-05-09"
 output: 
   html_document:
-    theme: cerulean
     toc: yes
     toc_float:
       collapsed: true
@@ -27,12 +26,12 @@ Welcome! This is my first foray into exploring the state of the art tools used t
 
 ### SPATA2
 
-SPATA2 is a framework for **SPA**tial **T**ranscriptomic **A**nalysis. I first encountered this R package from one the first ST papers in GBM [(Ravi et al 2022)](https://www.cell.com/cancer-cell/fulltext/S1535-6108(22)00220-3). 
+SPATA2 is a framework for **SPA**tial **T**ranscriptomic **A**nalysis. I first encountered this R package from one the first ST papers in GBM [(Ravi et al 2022)](https://www.cell.com/cancer-cell/fulltext/S1535-6108(22)00220-3).
 
 **Resources:**
 
-- [Github](https://github.com/theMILOlab/SPATA2)
-- [Tutorials](https://themilolab.github.io/SPATA2/)
+-   [Github](https://github.com/theMILOlab/SPATA2)
+-   [Tutorials](https://themilolab.github.io/SPATA2/)
 
 The package is well documented and provides tutorials to analyze the GBM ST data found in the Ravi paper. You can easily supply your own data or from other public sources for analysis as well.
 
@@ -40,7 +39,7 @@ I'm excited to see a stand alone paper describing this package and it seems we a
 
 ### Voyager
 
-This is a package from Lior Pachter's lab. It applies many geospatial packages and functions into the ST field. 
+This is a package from Lior Pachter's lab. It applies many geospatial packages and functions into the ST field.
 
 More to come....
 
@@ -50,8 +49,8 @@ SpatialLIBD was created by researchers at the Lieber Institute for Brain Develop
 
 **Resources:**
 
-- [Tutorials](https://research.libd.org/spatialLIBD/articles/spatialLIBD.html)
-- [Github](https://github.com/LieberInstitute/spatialLIBD/)
+-   [Tutorials](https://research.libd.org/spatialLIBD/articles/spatialLIBD.html)
+-   [Github](https://github.com/LieberInstitute/spatialLIBD/)
 
 ### Giotto Suite
 
@@ -63,8 +62,8 @@ Giotto Suite seems to be the most flexible spatial analysis platform current in 
 
 I will show you how to use SPATA2v2 to analyze one of Ravi's GBM samples. The analysis will be performed on the SPATA2 object.
 
-We will then explore various functions to convert the SPATA2 object to SCE, Seurat, SpatialExperiment objects. 
+We will then explore various functions to convert the SPATA2 object to SCE, Seurat, SpatialExperiment objects.
 
 Lastly, we will compare figures created from each of these objects with the original SPATA2 object.
 
-## Project 2: 
+## Project 2:
