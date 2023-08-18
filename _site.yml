@@ -2,10 +2,10 @@ name: "docs"
 output_dir: "docs"
 navbar:
   title: "NavBar Title"
-  right:
+  left:
     - text: "Home"
       href: index.html
-    - text: "spatial-transcriptomics-report"
+    - text: "spatial"
       href: spatial-transcriptomics-report.html
     - text: 'speed-and-distance'
       href: speed-and-distance.html
