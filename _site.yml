@@ -3,9 +3,9 @@ output_dir: "docs"
 navbar:
   title: ""
   left:
-    - text: "Home"
+    - text: 'Home'
       href: index.html
-    - text: "spatial"
+    - text: 'spatial'
       href: spatial-transcriptomics-report.html
     - text: 'speed-and-distance'
       href: speed-and-distance.html
@@ -24,6 +24,6 @@ navbar:
 
 output:
   html_document:
-    theme: sandstone ## Preference
+    theme: cerulean ## Preference
     highlight: textmate ## Preference
 
