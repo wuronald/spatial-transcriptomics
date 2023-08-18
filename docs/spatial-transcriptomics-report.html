@@ -247,8 +247,20 @@ $(document).ready(function () {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="spatial-transcriptomics-report.html">spatial</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Spatial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="spatial-transcriptomics-report.html"></a>
+    </li>
+    <li>
+      <a href="01_interoperability.html">01_interoperability</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="speed-and-distance.html">speed-and-distance</a>
@@ -329,21 +341,25 @@ library(SPATA2)
 #View(source_df)
 source_df</code></pre>
 <pre><code>## # A tibble: 34 × 21
-##    sample patient_id age   stage status organ anatomical_region pathology hist_classification     hist_abbreviation tags 
-##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;                   &lt;chr&gt;             &lt;chr&gt;
-##  1 275_T  #275UKF    &gt;=80      1 p      Brain frontal           Tumor     Glioblastoma            GBM               #N/A 
-##  2 270_T  #270UKF    40-50     1 p      Brain frontal           Tumor     Astrocytoma IDH mutated AA                #N/A 
-##  3 269_T  #269UKF    50-60     1 p      Brain occipital         Tumor     Glioblastoma            GBM               #N/A 
-##  4 268_T  #268UKF    40-50     1 p      Brain frontal           Tumor     Oligodendroglioma       ODG               #N/A 
-##  5 266_T  #266UKF    60-80     1 p      Brain temporal          Tumor     Gliosarcoma             GBM               #N/A 
-##  6 265_C  #265UKF    50-60     1 h      Brain temporal          #N/A      Cortex                  Cortex            #N/A 
-##  7 265_T  #265UKF    50-60     1 p      Brain temporal          Tumor     Giant cell glioblastoma GBM               #N/A 
-##  8 262_T  #262UKF    50-60     1 p      Brain temporal          Tumor     Glioblastoma            GBM               #N/A 
-##  9 260_T  #260UKF    &gt;=80      1 p      Brain temporal          Tumor     Glioblastoma            GBM               #N/A 
-## 10 259_C  #259UKF    60-80     1 h      Brain temporal          #N/A      Cortex                  GBM               #N/A 
+##    sample patient_id age   stage status organ
+##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;
+##  1 275_T  #275UKF    &gt;=80      1 p      Brain
+##  2 270_T  #270UKF    40-50     1 p      Brain
+##  3 269_T  #269UKF    50-60     1 p      Brain
+##  4 268_T  #268UKF    40-50     1 p      Brain
+##  5 266_T  #266UKF    60-80     1 p      Brain
+##  6 265_C  #265UKF    50-60     1 h      Brain
+##  7 265_T  #265UKF    50-60     1 p      Brain
+##  8 262_T  #262UKF    50-60     1 p      Brain
+##  9 260_T  #260UKF    &gt;=80      1 p      Brain
+## 10 259_C  #259UKF    60-80     1 h      Brain
 ## # ℹ 24 more rows
-## # ℹ 10 more variables: organization &lt;chr&gt;, who_grade &lt;chr&gt;, species &lt;chr&gt;, link_spata &lt;chr&gt;, link_raw &lt;chr&gt;,
-## #   link_image &lt;chr&gt;, citation &lt;chr&gt;, link_pub &lt;chr&gt;, date_added &lt;chr&gt;, assay_type &lt;chr&gt;</code></pre>
+## # ℹ 15 more variables: anatomical_region &lt;chr&gt;,
+## #   pathology &lt;chr&gt;, hist_classification &lt;chr&gt;,
+## #   hist_abbreviation &lt;chr&gt;, tags &lt;chr&gt;,
+## #   organization &lt;chr&gt;, who_grade &lt;chr&gt;, species &lt;chr&gt;,
+## #   link_spata &lt;chr&gt;, link_raw &lt;chr&gt;, link_image &lt;chr&gt;,
+## #   citation &lt;chr&gt;, link_pub &lt;chr&gt;, date_added &lt;chr&gt;, …</code></pre>
 <pre class="r"><code># load Shiny interactive downloader
 # launchSpataData()</code></pre>
 </div>
@@ -366,18 +382,19 @@ class="section level1">
 library(SPATA2)
 
 # ggplot2 plots can be easily combined with &#39;patchwork&#39;
-library(patchwork) 
-
-# load objects
+library(patchwork) </code></pre>
+<pre><code>## Warning: package &#39;patchwork&#39; was built under R version
+## 4.2.3</code></pre>
+<pre class="r"><code># load objects
 #human_cortex &lt;- loadSpataObject(&quot;data/spata-obj-cortex265.RDS&quot;)
 human_gbm &lt;- loadSpataObject(&quot;objects/275_T.RDS&quot;)</code></pre>
-<pre><code>## 23:23:45 Loading spata-object.</code></pre>
-<pre><code>## 23:23:50 Done.</code></pre>
-<pre><code>## 23:23:50 Updating spata2 object.</code></pre>
-<pre><code>## 23:23:50 Adding default for argument  &#39;min_lfc&#39; = 0.</code></pre>
-<pre><code>## 23:23:50 Adding default for argument  &#39;pt_size_fixed&#39; = TRUE.</code></pre>
-<pre><code>## 23:23:50 Converting variable &#39;segmentation&#39; to factor.</code></pre>
-<pre><code>## 23:23:50 Done.</code></pre>
+<pre><code>## 18:53:57 Loading spata-object.</code></pre>
+<pre><code>## 18:54:02 Done.</code></pre>
+<pre><code>## 18:54:02 Updating spata2 object.</code></pre>
+<pre><code>## 18:54:02 Adding default for argument  &#39;min_lfc&#39; = 0.</code></pre>
+<pre><code>## 18:54:02 Adding default for argument  &#39;pt_size_fixed&#39; = TRUE.</code></pre>
+<pre><code>## 18:54:02 Converting variable &#39;segmentation&#39; to factor.</code></pre>
+<pre><code>## 18:54:02 Done.</code></pre>
 <pre class="r"><code># store example genes of interest as character vectors
 genes_a &lt;- c(&quot;TUBA1B&quot;, &quot;HOPX&quot;, &quot;PLP1&quot;, &quot;ACTB&quot;)
 genes_b &lt;- c(&quot;CARTPT&quot;, &quot;OLIG1&quot;, &quot;GFAP&quot;, &quot;SYNPR&quot;, &quot;HOPX&quot;, &quot;CCK&quot;)</code></pre>
@@ -392,8 +409,8 @@ p1 &lt;-
               pt_size = 1.2,
               pt_clrsp = &quot;magma&quot;
               )</code></pre>
-<pre><code>## 23:23:50 Normalizing values.</code></pre>
-<pre><code>## 23:23:50 Done.</code></pre>
+<pre><code>## 18:54:02 Normalizing values.</code></pre>
+<pre><code>## 18:54:02 Done.</code></pre>
 <pre class="r"><code># plot gene expression (spatially smoothed)
 p2 &lt;- 
   plotSurface(object = human_gbm, 
@@ -402,8 +419,8 @@ p2 &lt;-
               pt_clrsp = &quot;magma&quot;,
               smooth = TRUE, 
               smooth_span = 0.2)</code></pre>
-<pre><code>## 23:23:51 Normalizing values.</code></pre>
-<pre><code>## 23:23:51 Done.</code></pre>
+<pre><code>## 18:54:03 Normalizing values.</code></pre>
+<pre><code>## 18:54:03 Done.</code></pre>
 <pre class="r"><code># combine with patchwork 
 p1 + legendNone() +
 p2 + legendTop()</code></pre>

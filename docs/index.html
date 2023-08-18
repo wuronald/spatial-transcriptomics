@@ -323,8 +323,20 @@ div.tocify {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="spatial-transcriptomics-report.html">spatial</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Spatial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="spatial-transcriptomics-report.html"></a>
+    </li>
+    <li>
+      <a href="01_interoperability.html">01_interoperability</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="speed-and-distance.html">speed-and-distance</a>
@@ -435,7 +447,8 @@ class="section level2">
 <p>I will show you how to use SPATA2v2 to analyze one of Ravi’s GBM
 samples. The analysis will be performed on the SPATA2 object.</p>
 <p>We will then explore various functions to convert the SPATA2 object
-to SCE, Seurat, SpatialExperiment objects.</p>
+to SCE, Seurat, SpatialExperiment objects. - Seurat - SpatialExperiment
+(SPE) - SpatialFeatureExperiment (SFE)</p>
 <p>Lastly, we will compare figures created from each of these objects
 with the original SPATA2 object.</p>
 </div>

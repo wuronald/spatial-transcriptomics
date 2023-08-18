@@ -58,6 +58,3 @@ wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Gl
 ```{bash, eval=FALSE}
 echo "hello"
 ```
-```{bash, eval=TRUE}
-echo "bye"
-```
