@@ -1,7 +1,7 @@
 name: "docs"
 output_dir: "docs"
 navbar:
-  title: "NavBar Title"
+  title: ""
   left:
     - text: "Home"
       href: index.html
