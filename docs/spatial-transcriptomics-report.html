@@ -18,7 +18,7 @@
 <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -366,18 +366,18 @@ class="section level1">
 library(SPATA2)
 
 # ggplot2 plots can be easily combined with &#39;patchwork&#39;
-library(patchwork) </code></pre>
-<pre><code>## Warning: package &#39;patchwork&#39; was built under R version 4.2.3</code></pre>
-<pre class="r"><code># load objects
+library(patchwork) 
+
+# load objects
 #human_cortex &lt;- loadSpataObject(&quot;data/spata-obj-cortex265.RDS&quot;)
 human_gbm &lt;- loadSpataObject(&quot;objects/275_T.RDS&quot;)</code></pre>
-<pre><code>## 23:01:15 Loading spata-object.</code></pre>
-<pre><code>## 23:01:22 Done.</code></pre>
-<pre><code>## 23:01:22 Updating spata2 object.</code></pre>
-<pre><code>## 23:01:22 Adding default for argument  &#39;min_lfc&#39; = 0.</code></pre>
-<pre><code>## 23:01:22 Adding default for argument  &#39;pt_size_fixed&#39; = TRUE.</code></pre>
-<pre><code>## 23:01:22 Converting variable &#39;segmentation&#39; to factor.</code></pre>
-<pre><code>## 23:01:22 Done.</code></pre>
+<pre><code>## 23:23:45 Loading spata-object.</code></pre>
+<pre><code>## 23:23:50 Done.</code></pre>
+<pre><code>## 23:23:50 Updating spata2 object.</code></pre>
+<pre><code>## 23:23:50 Adding default for argument  &#39;min_lfc&#39; = 0.</code></pre>
+<pre><code>## 23:23:50 Adding default for argument  &#39;pt_size_fixed&#39; = TRUE.</code></pre>
+<pre><code>## 23:23:50 Converting variable &#39;segmentation&#39; to factor.</code></pre>
+<pre><code>## 23:23:50 Done.</code></pre>
 <pre class="r"><code># store example genes of interest as character vectors
 genes_a &lt;- c(&quot;TUBA1B&quot;, &quot;HOPX&quot;, &quot;PLP1&quot;, &quot;ACTB&quot;)
 genes_b &lt;- c(&quot;CARTPT&quot;, &quot;OLIG1&quot;, &quot;GFAP&quot;, &quot;SYNPR&quot;, &quot;HOPX&quot;, &quot;CCK&quot;)</code></pre>
@@ -392,8 +392,8 @@ p1 &lt;-
               pt_size = 1.2,
               pt_clrsp = &quot;magma&quot;
               )</code></pre>
-<pre><code>## 23:01:22 Normalizing values.</code></pre>
-<pre><code>## 23:01:22 Done.</code></pre>
+<pre><code>## 23:23:50 Normalizing values.</code></pre>
+<pre><code>## 23:23:50 Done.</code></pre>
 <pre class="r"><code># plot gene expression (spatially smoothed)
 p2 &lt;- 
   plotSurface(object = human_gbm, 
@@ -402,8 +402,8 @@ p2 &lt;-
               pt_clrsp = &quot;magma&quot;,
               smooth = TRUE, 
               smooth_span = 0.2)</code></pre>
-<pre><code>## 23:01:22 Normalizing values.
-## 23:01:22 Done.</code></pre>
+<pre><code>## 23:23:51 Normalizing values.</code></pre>
+<pre><code>## 23:23:51 Done.</code></pre>
 <pre class="r"><code># combine with patchwork 
 p1 + legendNone() +
 p2 + legendTop()</code></pre>
