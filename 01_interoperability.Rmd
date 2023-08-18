@@ -1,0 +1,63 @@
+---
+title: "01_interoperability"
+author: "Ronald Wu"
+date: '2023-08-18'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load Libraries
+```{r load libraries}
+```
+
+# Download datasets
+## 1. 10x Genomics in-house GBM Visium sample
+
+10X genomics houses a sample GBM Visium dataset [here](https://www.10xgenomics.com/resources/datasets/human-glioblastoma-whole-transcriptome-analysis-1-standard-1-2-0). 
+
+We will download this dataset direct from the 10x genomics website:
+
+```{bash make folder, eval = FALSE}
+cd "/Users/wuronald/WKLab Dropbox/Ronald Wu/_wouters lab/Data Ronald/spatial-transcriptomics/data"
+mkdir -p data/10xgenomics/GBM/
+```
+
+```{bash download dataset, eval = FALSE}
+# Input Files
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_image.tif -P /data/10xgenomics/GBM
+
+# Output Files
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_molecule_info.h5 -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_filtered_feature_bc_matrix.h5 -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_filtered_feature_bc_matrix.tar.gz -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_raw_feature_bc_matrix.h5 -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_raw_feature_bc_matrix.tar.gz -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_analysis.tar.gz -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_spatial.tar.gz -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_metrics_summary.csv -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_web_summary.html -P /data/10xgenomics/GBM
+
+wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Glioblastoma/Parent_Visium_Human_Glioblastoma_cloupe.cloupe -P /data/10xgenomics/GBM
+
+```
+
+## 2. Ravi et al Visium GBM sample (275_T):
+```{bash, eval=FALSE}
+echo "hello"
+```
+```{bash, eval=TRUE}
+echo "bye"
+```

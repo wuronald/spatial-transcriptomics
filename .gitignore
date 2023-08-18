@@ -48,5 +48,8 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
+# raw data folder
+data/
+
 # SPATA2 Object Folder
 objects/
