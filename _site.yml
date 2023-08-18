@@ -24,6 +24,6 @@ navbar:
 
 output:
   html_document:
-    theme: cerulean ## Preference
+    theme: cosmo ## Preference
     highlight: textmate ## Preference
 
