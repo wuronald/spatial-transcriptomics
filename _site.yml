@@ -5,8 +5,10 @@ navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: 'About'
-      href: about.html
+    - text: "spatial-transcriptomics-report"
+      href: spatial-transcriptomics-report.html
+    - text: 'speed-and-distance'
+      href: speed-and-distance.html
     - text: 'Whatever Menu' ## setting up a drop down menu
       menu:
         - text: 'Whatever Menu 1'
