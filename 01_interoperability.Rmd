@@ -9,14 +9,49 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Library installation
+
+There was a major update to SPATA2 from version 0.1.0. Let's upgrade it to the current version 2.0.4.
+
+We will also download the MILOLab spatial transcriptomic database package `SPATAData` to help with ST dataset download. Upgrading version from 0.0.0.9000 to new version:
+
+```{r install libraries, eval = FALSE}
+install.packages("devtools")
+
+if (!base::requireNamespace("BiocManager", quietly = TRUE)){
+      install.packages("BiocManager")
+  }
+
+BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats',
+                       'limma', 'S4Vectors', 'SingleCellExperiment',
+                       'SummarizedExperiment', 'batchelor', 'Matrix.utils', 'EBImage'))
+
+install.packages("Seurat")
+
+devtools::install_github(repo = "kueckelj/confuns")
+devtools::install_github(repo = "theMILOlab/SPATAData")
+devtools::install_github(repo = "theMILOlab/SPATA2")
+
+# if you want to use monocle3 related wrappers 
+devtools::install_github('cole-trapnell-lab/leidenbase')
+devtools::install_github('cole-trapnell-lab/monocle3')
+```
+
 # Load Libraries
-```{r load libraries}
+
+```{r load libraries, warning=FALSE}
+library(SPATA2)
+library(SPATAData)
+
+library(Seurat)
+library(tidyverse)
 ```
 
 # Download datasets
+
 ## 1. 10x Genomics in-house GBM Visium sample
 
-10X genomics houses a sample GBM Visium dataset [here](https://www.10xgenomics.com/resources/datasets/human-glioblastoma-whole-transcriptome-analysis-1-standard-1-2-0). 
+10X genomics houses a sample GBM Visium dataset [here](https://www.10xgenomics.com/resources/datasets/human-glioblastoma-whole-transcriptome-analysis-1-standard-1-2-0).
 
 We will download this dataset direct from the 10x genomics website:
 
@@ -55,6 +90,48 @@ wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Gl
 ```
 
 ## 2. Ravi et al Visium GBM sample (275_T):
-```{bash, eval=FALSE}
-echo "hello"
+
+Using the `SPATAData` library, we will download one GBM patient sample with the ID 275_T. There are two options to load the 275_T GBM ST sample:
+
+-   First, is to download the SPATA2 object directly: `275_T.RDS`. This is done through the function SPATAData::downloadSpataObjects(), which saves the object locally after downloading it from dropbox. I have not gotten this to work due to a `cannot read from connection error`.
+
+-   Second, we can actually download the raw files.
+
+```{r, eval = FALSE}
+
+# download the object from dropbox
+downloadSpataObjects(sample_names = c("275_T"), folder = "objects")
+downloadSpataObjects(sample_names = c("313_T"), folder = "objects")
+
+# download the object interactively via shinyapp
+launchSpataData()
 ```
+
+Alternatively, we can use the dropbox link provided as part of the error message and download it via a web browser.
+
+```{r MILO lab metadata, eval = TRUE}
+# Meta data and links for MILO Lab database
+SPATAData::source_df
+
+# specify patient 275_T:
+SPATAData::source_df %>%
+  filter(sample == "275_T")
+
+# dropbox object link:
+dropbox_obj_link <-SPATAData::source_df %>%
+                  filter(sample == "275_T") %>%
+                  select("link_spata") %>% 
+                  pull
+# dropbox raw files link:
+dropbox_raw_link <-SPATAData::source_df %>%
+                  filter(sample == "275_T") %>%
+                  select("link_raw") %>% 
+                  pull
+```
+
+The following are the dropbox links for the 275_T sample:
+
+
+1. [RAW files](`r dropbox_raw_link`)
+
+2. [SPATA2 object](`r dropbox_obj_link`)

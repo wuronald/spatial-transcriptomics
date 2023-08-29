@@ -15,7 +15,7 @@
 
 <title>01_interoperability</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
@@ -308,8 +308,59 @@ $(document).ready(function () {
 </div>
 
 
+<div id="library-installation" class="section level1">
+<h1>Library installation</h1>
+<p>There was a major update to SPATA2 from version 0.1.0. Let’s upgrade
+it to the current version 2.0.4.</p>
+<p>We will also download the MILOLab spatial transcriptomic database
+package <code>SPATAData</code> to help with ST dataset download.
+Upgrading version from 0.0.0.9000 to new version:</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+
+if (!base::requireNamespace(&quot;BiocManager&quot;, quietly = TRUE)){
+      install.packages(&quot;BiocManager&quot;)
+  }
+
+BiocManager::install(c(&#39;BiocGenerics&#39;, &#39;DelayedArray&#39;, &#39;DelayedMatrixStats&#39;,
+                       &#39;limma&#39;, &#39;S4Vectors&#39;, &#39;SingleCellExperiment&#39;,
+                       &#39;SummarizedExperiment&#39;, &#39;batchelor&#39;, &#39;Matrix.utils&#39;, &#39;EBImage&#39;))
+
+install.packages(&quot;Seurat&quot;)
+
+devtools::install_github(repo = &quot;kueckelj/confuns&quot;)
+devtools::install_github(repo = &quot;theMILOlab/SPATAData&quot;)
+devtools::install_github(repo = &quot;theMILOlab/SPATA2&quot;)
+
+# if you want to use monocle3 related wrappers 
+devtools::install_github(&#39;cole-trapnell-lab/leidenbase&#39;)
+devtools::install_github(&#39;cole-trapnell-lab/monocle3&#39;)</code></pre>
+</div>
 <div id="load-libraries" class="section level1">
 <h1>Load Libraries</h1>
+<pre class="r"><code>library(SPATA2)</code></pre>
+<pre><code>## The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
+## which was just loaded, will retire in October 2023.
+## Please refer to R-spatial evolution reports for details, especially
+## https://r-spatial.org/r/2023/05/15/evolution4.html.
+## It may be desirable to make the sf package available;
+## package maintainers should consider adding sf to Suggests:.
+## The sp package is now running under evolution status 2
+##      (status 2 uses the sf package in place of rgdal)</code></pre>
+<pre class="r"><code>library(SPATAData)
+
+library(Seurat)</code></pre>
+<pre><code>## Attaching SeuratObject</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 <div id="download-datasets" class="section level1">
 <h1>Download datasets</h1>
@@ -350,7 +401,75 @@ wget https://cf.10xgenomics.com/samples/spatial-exp/1.2.0/Parent_Visium_Human_Gl
 </div>
 <div id="ravi-et-al-visium-gbm-sample-275_t" class="section level2">
 <h2>2. Ravi et al Visium GBM sample (275_T):</h2>
-<pre class="bash"><code>echo &quot;hello&quot;</code></pre>
+<p>Using the <code>SPATAData</code> library, we will download one GBM
+patient sample with the ID 275_T. There are two options to load the
+275_T GBM ST sample:</p>
+<ul>
+<li><p>First, is to download the SPATA2 object directly:
+<code>275_T.RDS</code>. This is done through the function
+SPATAData::downloadSpataObjects(), which saves the object locally after
+downloading it from dropbox. I have not gotten this to work due to a
+<code>cannot read from connection error</code>.</p></li>
+<li><p>Second, we can actually download the raw files.</p></li>
+</ul>
+<pre class="r"><code># download the object from dropbox
+downloadSpataObjects(sample_names = c(&quot;275_T&quot;), folder = &quot;objects&quot;)
+downloadSpataObjects(sample_names = c(&quot;313_T&quot;), folder = &quot;objects&quot;)
+
+# download the object interactively via shinyapp
+launchSpataData()</code></pre>
+<p>Alternatively, we can use the dropbox link provided as part of the
+error message and download it via a web browser.</p>
+<pre class="r"><code># Meta data and links for MILO Lab database
+SPATAData::source_df</code></pre>
+<pre><code>## # A tibble: 34 × 21
+##    sample patient_id age   stage status organ anatomical_region pathology
+##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt;    
+##  1 275_T  #275UKF    &gt;=80      1 p      Brain frontal           Tumor    
+##  2 270_T  #270UKF    40-50     1 p      Brain frontal           Tumor    
+##  3 269_T  #269UKF    50-60     1 p      Brain occipital         Tumor    
+##  4 268_T  #268UKF    40-50     1 p      Brain frontal           Tumor    
+##  5 266_T  #266UKF    60-80     1 p      Brain temporal          Tumor    
+##  6 265_C  #265UKF    50-60     1 h      Brain temporal          #N/A     
+##  7 265_T  #265UKF    50-60     1 p      Brain temporal          Tumor    
+##  8 262_T  #262UKF    50-60     1 p      Brain temporal          Tumor    
+##  9 260_T  #260UKF    &gt;=80      1 p      Brain temporal          Tumor    
+## 10 259_C  #259UKF    60-80     1 h      Brain temporal          #N/A     
+## # ℹ 24 more rows
+## # ℹ 13 more variables: hist_classification &lt;chr&gt;, hist_abbreviation &lt;chr&gt;,
+## #   tags &lt;chr&gt;, organization &lt;chr&gt;, who_grade &lt;chr&gt;, species &lt;chr&gt;,
+## #   link_spata &lt;chr&gt;, link_raw &lt;chr&gt;, link_image &lt;chr&gt;, citation &lt;chr&gt;,
+## #   link_pub &lt;chr&gt;, date_added &lt;chr&gt;, assay_type &lt;chr&gt;</code></pre>
+<pre class="r"><code># specify patient 275_T:
+SPATAData::source_df %&gt;%
+  filter(sample == &quot;275_T&quot;)</code></pre>
+<pre><code>## # A tibble: 1 × 21
+##   sample patient_id age   stage status organ anatomical_region pathology
+##   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt;    
+## 1 275_T  #275UKF    &gt;=80      1 p      Brain frontal           Tumor    
+## # ℹ 13 more variables: hist_classification &lt;chr&gt;, hist_abbreviation &lt;chr&gt;,
+## #   tags &lt;chr&gt;, organization &lt;chr&gt;, who_grade &lt;chr&gt;, species &lt;chr&gt;,
+## #   link_spata &lt;chr&gt;, link_raw &lt;chr&gt;, link_image &lt;chr&gt;, citation &lt;chr&gt;,
+## #   link_pub &lt;chr&gt;, date_added &lt;chr&gt;, assay_type &lt;chr&gt;</code></pre>
+<pre class="r"><code># dropbox object link:
+dropbox_obj_link &lt;-SPATAData::source_df %&gt;%
+                  filter(sample == &quot;275_T&quot;) %&gt;%
+                  select(&quot;link_spata&quot;) %&gt;% 
+                  pull
+# dropbox raw files link:
+dropbox_raw_link &lt;-SPATAData::source_df %&gt;%
+                  filter(sample == &quot;275_T&quot;) %&gt;%
+                  select(&quot;link_raw&quot;) %&gt;% 
+                  pull</code></pre>
+<p>The following are the dropbox links for the 275_T sample:</p>
+<ol style="list-style-type: decimal">
+<li><p><a
+href="https://www.dropbox.com/scl/fo/l5hmcuihkgdpdjwqx8brp/h?dl=1&amp;rlkey=i7i0x1iopc4w606ccqlsq3nix">RAW
+files</a></p></li>
+<li><p><a
+href="https://www.dropbox.com/s/o9v04egctkpizta/275_T.RDS?dl=1">SPATA2
+object</a></p></li>
+</ol>
 </div>
 </div>
 

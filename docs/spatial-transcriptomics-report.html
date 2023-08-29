@@ -15,7 +15,7 @@
 
 <title>spatial-transcriptomics</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
@@ -341,25 +341,23 @@ library(SPATA2)
 #View(source_df)
 source_df</code></pre>
 <pre><code>## # A tibble: 34 × 21
-##    sample patient_id age   stage status organ
-##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;
-##  1 275_T  #275UKF    &gt;=80      1 p      Brain
-##  2 270_T  #270UKF    40-50     1 p      Brain
-##  3 269_T  #269UKF    50-60     1 p      Brain
-##  4 268_T  #268UKF    40-50     1 p      Brain
-##  5 266_T  #266UKF    60-80     1 p      Brain
-##  6 265_C  #265UKF    50-60     1 h      Brain
-##  7 265_T  #265UKF    50-60     1 p      Brain
-##  8 262_T  #262UKF    50-60     1 p      Brain
-##  9 260_T  #260UKF    &gt;=80      1 p      Brain
-## 10 259_C  #259UKF    60-80     1 h      Brain
+##    sample patient_id age   stage status organ anatomical_region pathology
+##    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt;    
+##  1 275_T  #275UKF    &gt;=80      1 p      Brain frontal           Tumor    
+##  2 270_T  #270UKF    40-50     1 p      Brain frontal           Tumor    
+##  3 269_T  #269UKF    50-60     1 p      Brain occipital         Tumor    
+##  4 268_T  #268UKF    40-50     1 p      Brain frontal           Tumor    
+##  5 266_T  #266UKF    60-80     1 p      Brain temporal          Tumor    
+##  6 265_C  #265UKF    50-60     1 h      Brain temporal          #N/A     
+##  7 265_T  #265UKF    50-60     1 p      Brain temporal          Tumor    
+##  8 262_T  #262UKF    50-60     1 p      Brain temporal          Tumor    
+##  9 260_T  #260UKF    &gt;=80      1 p      Brain temporal          Tumor    
+## 10 259_C  #259UKF    60-80     1 h      Brain temporal          #N/A     
 ## # ℹ 24 more rows
-## # ℹ 15 more variables: anatomical_region &lt;chr&gt;,
-## #   pathology &lt;chr&gt;, hist_classification &lt;chr&gt;,
-## #   hist_abbreviation &lt;chr&gt;, tags &lt;chr&gt;,
-## #   organization &lt;chr&gt;, who_grade &lt;chr&gt;, species &lt;chr&gt;,
-## #   link_spata &lt;chr&gt;, link_raw &lt;chr&gt;, link_image &lt;chr&gt;,
-## #   citation &lt;chr&gt;, link_pub &lt;chr&gt;, date_added &lt;chr&gt;, …</code></pre>
+## # ℹ 13 more variables: hist_classification &lt;chr&gt;, hist_abbreviation &lt;chr&gt;,
+## #   tags &lt;chr&gt;, organization &lt;chr&gt;, who_grade &lt;chr&gt;, species &lt;chr&gt;,
+## #   link_spata &lt;chr&gt;, link_raw &lt;chr&gt;, link_image &lt;chr&gt;, citation &lt;chr&gt;,
+## #   link_pub &lt;chr&gt;, date_added &lt;chr&gt;, assay_type &lt;chr&gt;</code></pre>
 <pre class="r"><code># load Shiny interactive downloader
 # launchSpataData()</code></pre>
 </div>
@@ -383,18 +381,29 @@ library(SPATA2)
 
 # ggplot2 plots can be easily combined with &#39;patchwork&#39;
 library(patchwork) </code></pre>
-<pre><code>## Warning: package &#39;patchwork&#39; was built under R version
-## 4.2.3</code></pre>
+<pre><code>## Warning: package &#39;patchwork&#39; was built under R version 4.2.3</code></pre>
 <pre class="r"><code># load objects
 #human_cortex &lt;- loadSpataObject(&quot;data/spata-obj-cortex265.RDS&quot;)
 human_gbm &lt;- loadSpataObject(&quot;objects/275_T.RDS&quot;)</code></pre>
-<pre><code>## 18:53:57 Loading spata-object.</code></pre>
-<pre><code>## 18:54:02 Done.</code></pre>
-<pre><code>## 18:54:02 Updating spata2 object.</code></pre>
-<pre><code>## 18:54:02 Adding default for argument  &#39;min_lfc&#39; = 0.</code></pre>
-<pre><code>## 18:54:02 Adding default for argument  &#39;pt_size_fixed&#39; = TRUE.</code></pre>
-<pre><code>## 18:54:02 Converting variable &#39;segmentation&#39; to factor.</code></pre>
-<pre><code>## 18:54:02 Done.</code></pre>
+<pre><code>## 21:02:32 Loading `spata2` object.</code></pre>
+<pre><code>## 21:02:38 Done.</code></pre>
+<pre><code>## 21:02:38 Updating spata2 object.</code></pre>
+<pre><code>## 21:02:38 Adding default for argument  &#39;min_lfc&#39; = 0.</code></pre>
+<pre><code>## 21:02:38 Adding default for argument  &#39;pt_size_fixed&#39; = TRUE.</code></pre>
+<pre><code>## 21:02:38 Converting variable &#39;segmentation&#39; to factor.</code></pre>
+<pre><code>## 21:02:38 Creating new object of class `Visium`.</code></pre>
+<pre><code>## 21:02:38 We have aligned the surface plotting to the mechanism used by other packages.
+##          So far, plotting surface plots with SPATA2 has resulted in mirror inverted plots.
+##          This is no longer the case.
+##          You can use the functions `flipCoords()`, `flipImage()` and `flipImageAndCoords()`
+##          to manually align coordinates and image as well as the &#39;plotting direction&#39;.</code></pre>
+<pre><code>## 21:02:38 Computing pixel scale factor.</code></pre>
+<pre><code>## 21:02:38 Using center to center distance to compute pixel scale factor.</code></pre>
+<pre><code>## 21:02:38 Computing barcode spot distances.</code></pre>
+<pre><code>## 21:02:47 Done.</code></pre>
+<pre><code>## 21:02:49 Computing tissue outline.</code></pre>
+<pre><code>## 21:03:01 Tissue outline set.</code></pre>
+<pre><code>## 21:03:01 Object updated. New version: 2.0.4</code></pre>
 <pre class="r"><code># store example genes of interest as character vectors
 genes_a &lt;- c(&quot;TUBA1B&quot;, &quot;HOPX&quot;, &quot;PLP1&quot;, &quot;ACTB&quot;)
 genes_b &lt;- c(&quot;CARTPT&quot;, &quot;OLIG1&quot;, &quot;GFAP&quot;, &quot;SYNPR&quot;, &quot;HOPX&quot;, &quot;CCK&quot;)</code></pre>
@@ -409,8 +418,9 @@ p1 &lt;-
               pt_size = 1.2,
               pt_clrsp = &quot;magma&quot;
               )</code></pre>
-<pre><code>## 18:54:02 Normalizing values.</code></pre>
-<pre><code>## 18:54:02 Done.</code></pre>
+<pre><code>## 21:03:02 Using matrix &#39;scaled&#39;.</code></pre>
+<pre><code>## 21:03:02 Normalizing values.</code></pre>
+<pre><code>## 21:03:02 Done.</code></pre>
 <pre class="r"><code># plot gene expression (spatially smoothed)
 p2 &lt;- 
   plotSurface(object = human_gbm, 
@@ -419,8 +429,9 @@ p2 &lt;-
               pt_clrsp = &quot;magma&quot;,
               smooth = TRUE, 
               smooth_span = 0.2)</code></pre>
-<pre><code>## 18:54:03 Normalizing values.</code></pre>
-<pre><code>## 18:54:03 Done.</code></pre>
+<pre><code>## 21:03:02 Using matrix &#39;scaled&#39;.</code></pre>
+<pre><code>## 21:03:03 Normalizing values.</code></pre>
+<pre><code>## 21:03:03 Done.</code></pre>
 <pre class="r"><code># combine with patchwork 
 p1 + legendNone() +
 p2 + legendTop()</code></pre>
