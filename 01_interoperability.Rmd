@@ -35,6 +35,13 @@ devtools::install_github(repo = "theMILOlab/SPATA2")
 # if you want to use monocle3 related wrappers 
 devtools::install_github('cole-trapnell-lab/leidenbase')
 devtools::install_github('cole-trapnell-lab/monocle3')
+
+# SpatialExperiment
+
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("SpatialExperiment")
 ```
 
 # Load Libraries
@@ -45,6 +52,8 @@ library(SPATAData)
 
 library(Seurat)
 library(tidyverse)
+
+library(SpatialExperiment)
 ```
 
 # Download datasets
@@ -135,3 +144,53 @@ The following are the dropbox links for the 275_T sample:
 1. [RAW files](`r dropbox_raw_link`)
 
 2. [SPATA2 object](`r dropbox_obj_link`)
+
+# Loading data:
+
+## 1. Load as SPATA2 Object
+
+## 2. Load as SpatialExperiment (spe) object
+
+Code below is based on section 2.2 spot-based SpatialExperiment vignette located [here](https://bioconductor.org/packages/release/bioc/vignettes/SpatialExperiment/inst/doc/SpatialExperiment.html#11_Introduction) with minor modifications.
+
+```{r load as SpatialExperiment, eval = FALSE}
+library(SpatialExperiment)
+library(here)
+
+# read in counts
+dir <- here("data","10xgenomics","GBM") # location of the 10xgenomics GBM raw data
+
+fnm <- here(dir,"raw_feature_bc_matrix")
+
+sce <- DropletUtils::read10xCounts(fnm)
+
+# read in image data
+img <- readImgData(
+    path = file.path(dir, "spatial"),
+    sample_id = "Parent_Visium_Human_Glioblastoma")
+
+# read in spatial coordinates
+fnm <- here(dir, "spatial", "tissue_positions_list.csv")
+xyz <- read.csv(fnm, header = FALSE,
+    col.names = c(
+        "barcode", "in_tissue", "array_row", "array_col",
+        "pxl_row_in_fullres", "pxl_col_in_fullres"))
+
+# construct observation & feature metadata
+rd <- S4Vectors::DataFrame(
+    symbol = rowData(sce)$Symbol)
+
+# Can also use read10xVisium()
+
+# construct 'SpatialExperiment'
+
+spe <- SpatialExperiment(
+    assays = list(counts = assay(sce)),
+    rowData = rd, 
+    colData = DataFrame(xyz), 
+    spatialCoordsNames = c("pxl_col_in_fullres", "pxl_row_in_fullres"),
+    imgData = img,
+    sample_id = "Parent_Visium_Human_Glioblastoma")
+
+```
+
